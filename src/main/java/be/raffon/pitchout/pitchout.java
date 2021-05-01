@@ -371,6 +371,7 @@ public class pitchout extends JavaPlugin implements Listener {
             yaml.save(fileconfig);
             config = YamlConfiguration.loadConfiguration(fileconfig);
         }catch(Exception e){
+        	System.out.println("error");
              e.printStackTrace();
         }
     }

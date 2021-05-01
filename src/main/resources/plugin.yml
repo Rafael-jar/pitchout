@@ -1,0 +1,11 @@
+name: Pitchout
+main: be.raffon.pitchout.pitchout
+version: 0.1
+description: Plugin pitchout gratuit fait par Rafael Silva Mendes
+author: Raffon
+api-version: 1.16
+commands:
+  pitchout:
+    description: Commande principale.
+    usage: /pitchout
+    permission: survie.config

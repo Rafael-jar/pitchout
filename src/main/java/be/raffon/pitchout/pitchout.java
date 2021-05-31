@@ -41,11 +41,7 @@ import be.raffon.pitchout.scoreboards.games.status;
 
 public class pitchout extends JavaPlugin implements Listener {
 	
-	String host;
-	int port;
-	String database;
-	String username;
-	String password;
+
 	public static YamlConfiguration config;
 	public static File fileconfig;
 	public static String text = "["+ChatColor.RED+"Pichout"+ChatColor.WHITE+"]";
@@ -66,11 +62,16 @@ public class pitchout extends JavaPlugin implements Listener {
 		YamlConfiguration config = YamlConfiguration.loadConfiguration(fileconfig);
 		this.config = config;
 		games = new GameManager();
+		String host;
+		int port;
+		String database;
+		String username;
+		String password;
 		host = "localhost";
 		port = 3306;
 		database = "sf2021";
 		username = "sf2021";
-		password = "Lq%n9aajZS7CtU";
+		password = "password";
 		sqlmanager = new SQLManager(host, port, database, username, password);
         
 		this.tasks.put(-1, Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
@@ -195,56 +196,7 @@ public class pitchout extends JavaPlugin implements Listener {
 		return bool.get();
 		
 	}
-    
-    /*@EventHandler
-    public void onPlayerDamage(EntityDamageEvent e){
-    	if (!(e.getEntity() instanceof  Player)) return;
-    	Player pl = (Player) e.getEntity();
-    	
-    	
-    	if (DamageCause.VOID == e.getCause()){
-    		e.setCancelled(true);
-    		Game game = games.getPlayerGame(pl);
-    		
-    		Random rand = new Random();
-    		Integer in = game.loc.locations.size();
-    		int random = rand.nextInt(in);
-    		
-    		Location loc = game.loc.locations.get(random);
-    		pl.setFallDistance(0.0f);
-    		pl.teleport(loc);
-    		pl.setFoodLevel(15);
-    		
-    		game.removeLive(pl);
-    		
-    		Integer survivors = 0;
-    		Player sur = null;
-    		for(Player player : game.players) {
-    			if(player.getGameMode() == GameMode.SURVIVAL) {
-    				survivors = survivors + 1;
-    				sur = player;
-    			}
-    		}
-    		if(survivors == 1) {
-    			game.broadCast(text + " "+sur.getDisplayName() + " is the winner !");
-    			game.end();
-    		}
-    		
-    		if(game.damagers.containsKey(pl.getUniqueId())) {
-    			return;
-    		}
-    		UUID killer = game.damagers.get(pl.getUniqueId());
 
-    		Integer kills = game.scores.get(killer);
-    		game.scores.remove(killer);
-    		game.scores.put(killer, kills);
-    		
-    		Bukkit.getPlayer(killer).sendMessage(text + "You now have " + kills + " kills.");
-
-    	}
-    	
-    }*/
-    
     @EventHandler
     public void onMove(PlayerMoveEvent e) {
     	Player pl = e.getPlayer();
@@ -321,30 +273,6 @@ public class pitchout extends JavaPlugin implements Listener {
     public void onDamage(EntityDamageByEntityEvent e) {
     	if (!(e.getEntity() instanceof  Player)) return;
     	Player pl = (Player) e.getEntity();
-
-    	/*if (e.getDamager() instanceof Player) {
-    		Player damager = (Player) e.getDamager();
-    		
-    		Game game = this.games.getPlayerGame(pl);
-    		Game game2 = this.games.getPlayerGame(damager);
-    		
-    		if(game.equals(game2)) {
-
-    			pl.setHealth(20);
-    			pl.setFoodLevel(20);
-
-    			if(game.Status == status.WAITING) {e.setCancelled(true); return;}
-    			
-    			if(game.damagers.get(pl.getUniqueId()) == null) {
-    				game.damagers.put(pl.getUniqueId(), damager.getUniqueId());
-    			} else {
-    				game.damagers.remove(pl.getUniqueId());
-    				game.damagers.put(pl.getUniqueId(), damager.getUniqueId());
-    			}
-    		}
-    		
-    		
-    	}*/
     	
     }
     
